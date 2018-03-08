@@ -1,4 +1,4 @@
-package com.unisys.omse.webmanager.service.serviceImpl;
+package com.unisys.omse.webmanager.service.impl;
 
 import com.unisys.omse.webmanager.dao.RoleDao;
 import com.unisys.omse.webmanager.po.Role;
