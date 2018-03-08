@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 public class WebmanagerApplication {
-	//å¢åŠ æ•°æ®æºç®¡ç†
+	//Ôö¼ÓÊı¾İÔ´¹ÜÀí
 	@Bean(name = "dataSource")
 	@Primary
 	@ConfigurationProperties(prefix = "spring.datasource")
@@ -21,7 +21,7 @@ public class WebmanagerApplication {
 		return DataSourceBuilder.create().type(com.alibaba.druid.pool.DruidDataSource.class).build();
 	}
 
-	//å¢åŠ äº‹åŠ¡ç®¡ç†
+	//Ôö¼ÓÊÂÎñ¹ÜÀí
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
