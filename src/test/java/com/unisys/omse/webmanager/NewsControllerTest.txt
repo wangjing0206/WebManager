@@ -10,3 +10,12 @@ setCurrentNews:
 http://localhost:7001/newsSetCurrentNews?id=2
 selectCurrentNews
 http://localhost:7001/newsSelectCurrentNews
+
+
+
+Node:
+Insert:http://localhost:7001/nodeInsert?nodeid=1&nodename=OMSE-Node-1&configid=1&status=offline&laststarttime=2000-01-01 00:00:00&laststoptime=2000-01-01 00:00:00&token=39393202
+Delete:http://localhost:7001/nodeDelete?id=1
+Update://localhost:7001/nodeUpdate?id=2&configid=1&status=offline&laststarttime=2018-03-08 00:00:00&laststoptime=2000-01-01 00:00:00
+Select:http://localhost:7001/nodeSelectOne?id=2
+SelectAll:http://localhost:7001/nodeSelectAll?whichNum=1
