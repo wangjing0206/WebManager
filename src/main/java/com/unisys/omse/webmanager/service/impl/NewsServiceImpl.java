@@ -5,6 +5,8 @@ import com.unisys.omse.webmanager.po.TblNews;
 import com.unisys.omse.webmanager.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,16 +16,19 @@ public class NewsServiceImpl implements NewsService {
     private NewsDao newsDao;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int newsInsert(TblNews tblNews) {
         return newsDao.newsInsert(tblNews);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int newsDelete(int id) {
         return newsDao.newsDelete(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int newsUpdate(TblNews tblNews) {
         return newsDao.newsUpdate(tblNews);
     }

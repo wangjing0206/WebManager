@@ -79,7 +79,7 @@ public class NewsController {
     @RequestMapping("/newsSetCurrentNews")
     private Object newsSetCurrentNews(HttpServletRequest req){
         String id = req.getParameter("id");
-
+        logger.info("current news id:"+id);
         TblNews currentNews = newsService.newsSelectCurrentNews();
         if(currentNews!=null) {
             currentNews.setCurrentNews(0);
