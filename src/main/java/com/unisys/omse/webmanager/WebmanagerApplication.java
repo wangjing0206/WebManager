@@ -13,7 +13,6 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 public class WebmanagerApplication {
-	//增加数据源管理
 	@Bean(name = "dataSource")
 	@Primary
 	@ConfigurationProperties(prefix = "spring.datasource")
@@ -21,7 +20,6 @@ public class WebmanagerApplication {
 		return DataSourceBuilder.create().type(com.alibaba.druid.pool.DruidDataSource.class).build();
 	}
 
-	//增加事务管理
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
