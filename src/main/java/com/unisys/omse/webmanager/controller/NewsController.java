@@ -2,17 +2,20 @@ package com.unisys.omse.webmanager.controller;
 
 import com.unisys.omse.webmanager.po.TblNews;
 import com.unisys.omse.webmanager.service.NewsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
 public class NewsController {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
+
     @Autowired
     private NewsService newsService;
 
