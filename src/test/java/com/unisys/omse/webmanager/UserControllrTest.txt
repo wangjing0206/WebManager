@@ -4,7 +4,7 @@ http://localhost:7001/parseJson?whichNum=-1
 http://localhost:7001/userSelectAllFromFastJson?whichNum=-1
 http://localhost:7001/userDelete?id=1
 http://localhost:7001/userInsert?userName=王五&password=123&tel=12345678912&sex=1&groupId=1&remark=beizhu&roleId=2
-http://localhost:7001/userUpdate?userName=王五11&password=1231&tel=12345678911&sex=0&groupId=2&remark=beizhu1&roleId=1&num=2018003&createDate=2018-03-07%2023:50:11&id=3
+http://localhost:7001/userUpdate?userName=王五1&password=1231&tel=12345678911&sex=0&groupId=2&remark=beizhu1&roleId=1&num=2018003&createDate=2018-03-07%2023:50:11&id=3
 
 
 
