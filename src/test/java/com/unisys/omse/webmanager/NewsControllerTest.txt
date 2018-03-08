@@ -1,0 +1,12 @@
+insert:
+http://localhost:7001/newsInsert?title=t1&content=content1
+delete:
+http://localhost:7001/newsDelete?id=1
+update:
+http://localhost:7001/newsUpdate?id=2&title=t2&content=content2
+selectAll:
+http://localhost:7001/newsSelectAll?whichNum=1
+setCurrentNews:
+http://localhost:7001/newsSetCurrentNews?id=2
+selectCurrentNews
+http://localhost:7001/newsSelectCurrentNews
