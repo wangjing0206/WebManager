@@ -5,6 +5,8 @@ import com.unisys.omse.webmanager.po.ViewUser;
 import com.unisys.omse.webmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,16 +15,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int userInsert(ViewUser viewUser) {
         return userDao.userInsert(viewUser);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int userDelete(int id) {
         return userDao.userDelete(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int userUpdate(ViewUser viewUser) {
         return userDao.userUpdate(viewUser);
     }
