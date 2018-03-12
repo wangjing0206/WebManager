@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class TblNode {
 
+
     private int id;
     private int nodeid;
     private String nodename;
