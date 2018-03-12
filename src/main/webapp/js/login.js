@@ -12,7 +12,8 @@ function userLogin() {
     }
     $.ajax({
         type:"post",
-        url:"/userLogin",
+        /*url:"/userLogin",*/
+        url:"/userAuthLogin",
         async:true,
         timeout:10000,
         data:$("#frmLogin").serialize(),
@@ -20,10 +21,15 @@ function userLogin() {
             $('#numHtml').html('*');
             $('#passwordHtml').html('*');
             console.log(msg);
-            if (msg==1) {
+            var jsonData = JSON.parse(msg);   
+            console.log(jsonData.msg);
+            /*if (msg==1) {*/
+           	if (jsonData.msg=="登录成功") {
+           		window.alert("登录成功");
                 loginSuccess();
             }else{
                 $('#passwordHtml').html("用户名或密码不正确");
+                window.alert("登录失败");
             }
         },
         error:function(msg){
