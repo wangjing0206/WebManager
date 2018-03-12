@@ -141,6 +141,16 @@ public class ViewUser {
         this.remark = remark;
     }
 
+    public ViewUser(String userName, String tel, String num, int sex, int roleId, int groupId, String remark) {
+        this.userName = userName;
+        this.tel = tel;
+        this.num = num;
+        this.sex = sex;
+        this.roleId = roleId;
+        this.groupId = groupId;
+        this.remark = remark;
+    }
+
     @Override
     public String toString() {
         return "ViewUser{" +

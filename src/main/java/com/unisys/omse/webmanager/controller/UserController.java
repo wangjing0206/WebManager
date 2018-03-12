@@ -19,7 +19,8 @@ public class UserController {
     @RequestMapping(value="/userInsert")
     private Object userInsert(HttpServletRequest req){
         String userName=req.getParameter("userName");
-        String password=req.getParameter("password");
+        //String password=req.getParameter("password");
+        String password="123456";
         String tel=req.getParameter("tel");
         String num=req.getParameter("num");
         String sex=req.getParameter("sex");
@@ -52,34 +53,28 @@ public class UserController {
         //0定义和收值
         String id=req.getParameter("id");
         String userName=req.getParameter("userName");
-        String password=req.getParameter("password");
+        //String password=req.getParameter("password");
         String tel=req.getParameter("tel");
         String num=req.getParameter("num");
         String sex=req.getParameter("sex");
         String roleId=req.getParameter("roleId");
         String groupId=req.getParameter("groupId");
         //String isDeleted=req.getParameter("isDeleted");
-        String createDate=req.getParameter("createDate");
+        //String createDate=req.getParameter("createDate");
         String remark=req.getParameter("remark");
         ViewUser viewUser=null;
         //1封装到一个类中
-        try {
-            viewUser=new ViewUser
-                    (userName,password,tel,num,
-                            Integer.parseInt(sex),
-                            Integer.parseInt(roleId),
-                            Integer.parseInt(groupId),
-                            0,
-                            new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(createDate),
-                            remark
-                    );
-            viewUser.setId(Integer.parseInt(id));
-            System.out.println(viewUser);
+        viewUser=new ViewUser
+                (userName,tel,num,
+                        Integer.parseInt(sex),
+                        Integer.parseInt(roleId),
+                        Integer.parseInt(groupId),
+                        /*new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(createDate),*/
+                        remark
+                );
+        viewUser.setId(Integer.parseInt(id));
+        System.out.println(viewUser);
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-
-        }
         return userService.userUpdate(viewUser);
     }
     @RequestMapping(value="/userSelectOne")
@@ -94,6 +89,14 @@ public class UserController {
         String whichNum=req.getParameter("whichNum");
         return userService.userSelectAll(Integer.parseInt(whichNum));
     }
+    @RequestMapping(value="/userSearchAll")
+    private Object userSearchAll(HttpServletRequest req){
+        String userName=req.getParameter("userName1");
+        String whichNum=req.getParameter("whichNum");
+        ViewUser viewUser=new ViewUser();
+        viewUser.setUserName(userName);
+        return userService.userSearchALL(viewUser,Integer.parseInt(whichNum));
+    }
     @RequestMapping(value="/userSelectAllFromFastJson")
     private Object userSelectAllFromFastJson(HttpServletRequest req){
         String whichNum=req.getParameter("whichNum");
@@ -107,5 +110,14 @@ public class UserController {
         String json0 = JSON.parseArray(json).get(0).toString();
         String userName = JSON.parseObject(json0).get("userName").toString();
         return userName;
+    }
+    @RequestMapping(value="/userLogin")
+    private Object userLogin(HttpServletRequest req){
+        String num=req.getParameter("num");
+        String password=req.getParameter("password");
+        ViewUser viewUser=new ViewUser();;
+        viewUser.setNum(num);
+        viewUser.setPassword(password);
+        return userService.userLogin(viewUser);
     }
 }

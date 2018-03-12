@@ -22,8 +22,8 @@ public interface NewsDao {
     public int newsUpdate(TblNews tblnews);
 
     //selectCurrentNews
-    @Select("select * from tblnews where currentNews=1 limit 1")
-    public TblNews newsSelectCurrentNews();
+    @Select("select * from tblnews where currentNews=1 order by id desc limit 3" )
+    public List<TblNews>  newsSelectCurrentNews();
 
     //selectAll
     @Select("select * from tblnews order by id desc limit #{whichNum},10")

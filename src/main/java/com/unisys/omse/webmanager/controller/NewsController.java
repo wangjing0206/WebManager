@@ -1,5 +1,6 @@
 package com.unisys.omse.webmanager.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.unisys.omse.webmanager.po.TblNews;
 import com.unisys.omse.webmanager.service.NewsService;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class NewsController {
         //0定义和收值
         String title = req.getParameter("title");
         String content = req.getParameter("content");
-        int currentNews = 0;
+        String currentNews = req.getParameter("currentNews");
         long currentTime = System.currentTimeMillis();
         Date createDate = new Date(currentTime);
         Date updateDate = new Date(currentTime);
@@ -33,7 +34,7 @@ public class NewsController {
         TblNews tblNews = new TblNews(
                 title,
                 content,
-                currentNews,
+                Integer.parseInt(currentNews),
                 createDate,
                 updateDate );
         return newsService.newsInsert(tblNews);
@@ -52,14 +53,14 @@ public class NewsController {
 
         String title = req.getParameter("title");
         String content = req.getParameter("content");
-        int currentNews = 0;
+        String currentNews = req.getParameter("currentNews");
         long currentTime = System.currentTimeMillis();
         Date updateDate = new Date(currentTime);
 
         //1封装到类中
         tblNews.setTitle(title);
         tblNews.setContent(content);
-        tblNews.setCurrentNews(currentNews);
+        tblNews.setCurrentNews(Integer.parseInt(currentNews));
         tblNews.setUpdateDate(updateDate);
 
         return newsService.newsUpdate(tblNews);
@@ -76,19 +77,20 @@ public class NewsController {
         return newsService.newsSelectCurrentNews();
     }
 
-    @RequestMapping("/newsSetCurrentNews")
-    private Object newsSetCurrentNews(HttpServletRequest req){
-        String id = req.getParameter("id");
-        logger.info("current news id:"+id);
-        TblNews currentNews = newsService.newsSelectCurrentNews();
-        if(currentNews!=null) {
-            currentNews.setCurrentNews(0);
-            newsService.newsUpdate(currentNews);
-        }
 
-        TblNews newCurrentNews = newsService.newsSelectById(Integer.parseInt(id));
-        newCurrentNews.setCurrentNews(1);
-        return newsService.newsUpdate(newCurrentNews);
+    //newsSelectAllFromFastJson
+    @RequestMapping("/newsSelectAllFromFastJson")
+    private Object newsSelectAllFromFastJson(HttpServletRequest req){
+        //0定义和收值
+        String whichNum = req.getParameter("whichNum");
+        return JSON.toJSONString(newsService.newsSelectAll(Integer.parseInt(whichNum)));
+    }
+
+    @RequestMapping("/newsSelectById")
+    private Object newsSelectById(HttpServletRequest req){
+        String id = req.getParameter("id");
+        logger.info("id:"+id);
+        return newsService.newsSelectById(Integer.parseInt(id));
     }
 
 }

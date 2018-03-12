@@ -15,4 +15,8 @@ public interface UserService {
     public ViewUser userSelectOne(ViewUser viewUser);
     //4selectAll
     public List<ViewUser> userSelectAll(int whichNum);
+    //5登录验证
+    public int userLogin(ViewUser viewUser);
+    //6模糊查询
+    public List<ViewUser> userSearchALL(ViewUser viewUser, int whichNum);
 }

@@ -1,5 +1,7 @@
 package com.unisys.omse.webmanager.po;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class TblNews {
@@ -7,7 +9,9 @@ public class TblNews {
     private String title;
     private String content;
     private int currentNews;
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date createDate;
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
     private Date updateDate;
 
     public int getId() {

@@ -13,7 +13,7 @@ public interface NewsService {
     public int newsUpdate(TblNews tblNews);
 
     //selectCurrentNews
-    public TblNews newsSelectCurrentNews();
+    public List<TblNews> newsSelectCurrentNews();
     //selectAll
     public List<TblNews> newsSelectAll(int whichNum);
     //selectById

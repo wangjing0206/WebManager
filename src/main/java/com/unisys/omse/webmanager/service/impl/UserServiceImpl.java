@@ -42,4 +42,14 @@ public class UserServiceImpl implements UserService {
         whichNum=whichNum<1 ? 1 : whichNum;
         return userDao.userSelectALL((whichNum-1)*10);
     }
+
+    @Override
+    public int userLogin(ViewUser viewUser) {
+        return userDao.userLogin(viewUser);
+    }
+
+    @Override
+    public List<ViewUser> userSearchALL(ViewUser viewUser, int whichNum) {
+        return userDao.userSearchALL(viewUser,whichNum);
+    }
 }

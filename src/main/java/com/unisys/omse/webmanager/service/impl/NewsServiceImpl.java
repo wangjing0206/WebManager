@@ -34,7 +34,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public TblNews newsSelectCurrentNews() {
+    public List<TblNews> newsSelectCurrentNews() {
         return newsDao.newsSelectCurrentNews();
     }
 

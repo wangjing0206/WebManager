@@ -26,6 +26,12 @@ public class NodeControl {
         String status=req.getParameter("status");
         String laststarttime=req.getParameter("laststarttime");
         String laststoptime=req.getParameter("laststoptime");
+        if(laststarttime.indexOf("T")>-1){
+            laststarttime = laststarttime.replaceAll("T"," ");
+        }
+        if(laststoptime.indexOf("T")>-1){
+            laststoptime = laststoptime.replaceAll("T"," ");
+        }
         TblNode tblNode=null;
 
         try {
