@@ -6,7 +6,7 @@ function userLogin() {
         return false;
     }
     if(password==null||password==""){
-        $('#numHtml').html('*');
+        $('#numHtml').html('');
         $('#passwordHtml').html('请输入密码');
         return false;
     }
@@ -17,7 +17,7 @@ function userLogin() {
         timeout:10000,
         data:$("#frmLogin").serialize(),
         success:function(msg){
-            $('#numHtml').html('*');
+            $('#numHtml').html('');
             $('#passwordHtml').html('*');
             console.log(msg);
             if (msg==1) {
