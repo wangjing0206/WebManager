@@ -2,6 +2,8 @@ package com.unisys.omse.webmanager.controller;
 
 import com.unisys.omse.webmanager.po.TblNode;
 import com.unisys.omse.webmanager.service.NodeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,9 @@ import java.util.List;
 
 @RestController
 public class NodeControl {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private NodeService nodeService;
 
@@ -27,6 +32,15 @@ public class NodeControl {
         String laststarttime=req.getParameter("laststarttime");
         String laststoptime=req.getParameter("laststoptime");
         TblNode tblNode=null;
+        logger.debug("get nodeInsert message."+nodeid);
+
+        if (laststarttime.contains("T")){
+            laststarttime=laststarttime.replaceAll("T"," ");
+        }
+
+        if (laststoptime.contains("T")){
+            laststoptime=laststoptime.replaceAll("T"," ");
+        }
 
         try {
             tblNode = new TblNode(
@@ -35,6 +49,8 @@ public class NodeControl {
                     new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststarttime),
                     new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststoptime)
             );
+            logger.debug("get nodeInsert message."+req.getQueryString());
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -78,6 +94,8 @@ public class NodeControl {
     @RequestMapping("/nodeSelectOne")
     public Object nodeSelectOne(HttpServletRequest req) {
 
+        logger.debug("get nodeSelectOne message."+req.getQueryString());
+
         String id=req.getParameter("id");
         TblNode tblNode=new TblNode();
         tblNode.setId(Integer.parseInt(id));
@@ -88,7 +106,10 @@ public class NodeControl {
     @RequestMapping("/nodeSelectAll")
     public Object nodeSelectAll(HttpServletRequest req) {
 
+        logger.debug("get nodeSelectAll message."+req.getQueryString());
+
         String whichNum=req.getParameter("whichNum");
+        logger.debug("whichNum=."+whichNum);
         return nodeService.nodeSelectAll(Integer.parseInt(whichNum));
     }
 }
