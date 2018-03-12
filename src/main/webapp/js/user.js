@@ -2,6 +2,7 @@ var tbody0;
 function userSelectAll(){
     $('#userUpdate').hide();
     $('#userInsert').show();
+
 			$.ajax({
 			type:"get",
 			url:"/userSelectAllFromFastJson",
@@ -49,7 +50,7 @@ function userSelectAll(){
 }
 $(document).ready(function(){
 	//加载页面就查询
-    userSelectAll();
+    window.userSelectAll();
 	//insert
 	$("#frmUser").submit(function(){
 			$.ajax({
@@ -77,11 +78,60 @@ $(document).ready(function(){
 	//selectOne
 	//selectAll
 	$("#userSelectAll").click(function(){
+        $('#num1').val("");
+        $('#userName1').val("");
+        $('#groupName1').val("");
+        $('#roleName1').val("");
 		userSelectAll();
 	});
-    $("#frmSearch").submit(function(){
-        userSearchAll();
+    $("#userSearchAll").click(function(){
+        $('#userUpdate').hide();
+        $('#userInsert').show();
+        $.ajax({
+            type:"post",
+            url:"/userSearchAll",
+            async:true,
+            timeout:10000,
+            data:$("#frmSearch").serialize()+"&whichNum="+1,
+            success:function(msg){
+                console.log(msg);
+                tbody0=" ";
+                for (var i = 0; i < msg.length; i++) {
+                    tbody0+="<tr class='info'>";
+                    tbody0+="<td>";
+                    tbody0+=msg[i].num==null?"---":msg[i].num;
+                    tbody0+="</td>";
+                    tbody0+="<td>";
+                    tbody0+=msg[i].userName==null?"---":msg[i].userName;
+                    tbody0+="</td>";
+                    tbody0+="<td>";
+                    tbody0+=msg[i].sex==1?"男":"女";
+                    tbody0+="</td>";
+                    tbody0+="<td>";
+                    tbody0+=msg[i].tel==null?"---":msg[i].tel;
+                    tbody0+="</td>";
+                    tbody0+="<td>";
+                    tbody0+=msg[i].groupName==null?"---":msg[i].groupName;
+                    tbody0+="</td>";
+                    tbody0+="<td>";
+                    tbody0+=msg[i].roleName==null?"---":msg[i].roleName;
+                    tbody0+="</td>";
+                    tbody0+="<td>";
+                    tbody0+="<a href='javascript:void(0)' style='color: blue' onclick='userSelectOne("+msg[i].id+")'>更新</a>";
+                    tbody0+="</td>";
+                    tbody0+="<td>";
+                    tbody0+="<a href='javascript:void(0)' style='color: red' onclick='userDelete("+msg[i].id+")'>删除</a>";
+                    tbody0+="</td>";
+                    tbody0+="</tr>";
+                }
+
+                $("#tbody0").html(tbody0);
+            },
+            error:function(msg){
+                console.log(msg);
+            }
         });
+    });
     $("#userUpdate").click(function(){
         userUpdate();
     });
@@ -94,10 +144,9 @@ function userSearchAll(){
         url:"/userSearchAll",
         async:true,
         timeout:10000,
-        data:$("#frmSearch").serialize()+"&whichNum="+1,
+        data:$("#frmSearch").serialize(),
         dataType:"json",
         success:function(msg){
-            debugger
             console.log(msg);
             tbody0=" ";
             for (var i = 0; i < msg.length; i++) {
@@ -177,7 +226,7 @@ function userSelectOne(id){
 }
 function infoToPage(msg){
     $('#userInsert').hide();
-    $('#userUpdate').show()
+    $('#userUpdate').show();
 	$('#id').val(msg.id);
     $('#num').val(msg.num);
     $('#userName').val(msg.userName);

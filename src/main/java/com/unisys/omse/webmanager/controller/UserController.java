@@ -91,10 +91,16 @@ public class UserController {
     }
     @RequestMapping(value="/userSearchAll")
     private Object userSearchAll(HttpServletRequest req){
-        String userName=req.getParameter("userName1");
+        String num="%"+req.getParameter("num")+"%";
+        String userName="%"+req.getParameter("userName")+"%";
+        String groupName="%"+req.getParameter("groupName")+"%";
+        String roleName="%"+req.getParameter("roleName")+"%";
         String whichNum=req.getParameter("whichNum");
         ViewUser viewUser=new ViewUser();
+        viewUser.setNum(num);
         viewUser.setUserName(userName);
+        viewUser.setRoleName(roleName);
+        viewUser.setGroupName(groupName);
         return userService.userSearchALL(viewUser,Integer.parseInt(whichNum));
     }
     @RequestMapping(value="/userSelectAllFromFastJson")

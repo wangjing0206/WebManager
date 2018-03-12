@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<ViewUser> userSearchALL(ViewUser viewUser, int whichNum) {
-        return userDao.userSearchALL(viewUser,whichNum);
+        whichNum=whichNum<1 ? 1 : whichNum;
+        return userDao.userSearchALL(viewUser);
     }
 }

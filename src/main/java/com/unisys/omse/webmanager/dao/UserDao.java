@@ -30,6 +30,7 @@ public interface UserDao {
     @Select("select count(*) from tblUsers where num =#{num} and password=#{password}")
     public int userLogin(ViewUser viewUser);
     //searchAll 需满足分页
-    @Select("select * from tblUsers where isDeleted=0 and userName=#{userName} order by id desc limit #{whichNum},10")
-    public List<ViewUser> userSearchALL(ViewUser viewUser, int whichNum);
+    @Select("select * from viewUsers where isDeleted=0 and num like #{num} and userName like #{userName} and " +
+            "roleName like #{roleName} and groupName like #{groupName} order by id desc limit 0,10 ")
+    public List<ViewUser> userSearchALL(ViewUser viewUser);
 }

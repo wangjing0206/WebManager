@@ -1,7 +1,104 @@
 
+
+        var frmData = {  
+            id: "id",  
+            nodeid: "nodeid"  
+        };  
+
+function funNodeUpdate(id){
+		window.alert(id)
+		frmData.id=id
+		frmData.nodeid=id
+        util.fillFormData("#frmNode", formData);
+}
+
+
+function funNodeDelete(id){
+		window.alert(id)
+
+		$.ajax({
+			type:"get",
+			url:"/nodeDelete",
+			async:true,
+			timeout:10000,
+			//data:$("#frmNode").serialize(),
+			data:"id="+id,
+			dataType:"json",
+			
+			success:function(msg){
+				console.log(msg);
+			},
+			error:function(msg){
+				console.log(msg);
+			}
+		});
+
+}
+
 var tbody0="";
+function funNodeSelectOne(){
+		//window.alert("我是菜鸟我怕谁");
+		$.ajax({
+			type:"get",
+			url:"/nodeSelectOne",
+			async:true,
+			timeout:10000,
+			data:$("#frmNode").serialize(),
+			//data:"id=2",
+			dataType:"json",
+			
+			success:function(msg){
+				console.log(msg);
+				tbody0="";
+                	tbody0+="<tr class='info'>";
+
+                	tbody0+="<td>";
+                	tbody0+=msg.nodeid;
+                	tbody0+="</td>";
+                  	
+                  	tbody0+="<td>";
+				 	tbody0+=msg.nodename;
+				 	tbody0+="</td>";
+                  
+				 	tbody0+="<td>";
+				 	tbody0+=msg.configid;
+				 	tbody0+="</td>";
+                  
+				 	tbody0+="<td>";
+				 	tbody0+=msg.ipaddress
+				 	tbody0+="</td>";
+                  
+				 	tbody0+="<td>";
+				 	tbody0+=msg.status;
+				 	tbody0+="</td>";
+                  
+				 	tbody0+="<td>";
+				 	tbody0+=msg.laststarttime;
+				 	tbody0+="</td>";
+                  
+				 	tbody0+="<td>";
+				 	tbody0+=msg.laststoptime;
+				 	tbody0+="</td>";
+                  
+				 	tbody0+="<td>";
+				 	tbody0+="<a href='javascript:void(0)' onclick=funNodeUpdate("+msg.id+")>更新</a>";
+				 	tbody0+="</td>";
+				
+				 	tbody0+="<td>";
+				 	tbody0+="<a href='javascript:void(0)' onclick=funNodeDelete("+msg.id+")>删除</a>";
+				 	tbody0+="</td>";
+
+                	tbody0+="</tr>";
+
+				$("#tbody0").html(tbody0);
+			},
+			error:function(msg){
+				console.log(msg);
+			}
+		});
+}
+
 function funNodeSelectAll(){
-//		window.alert("我是菜鸟我怕谁");
 		$.ajax({
 			type:"get",
 			url:"/nodeSelectAll",
@@ -45,11 +142,11 @@ function funNodeSelectAll(){
 					tbody0+="</td>";
 
 					tbody0+="<td>";	
-					tbody0+="<a href='javascript:void(0)' onclick=funCalendarUpdate()>更新</a>";
+					tbody0+="<a href='javascript:void(0)' onclick=funNodeUpdate("+msg[i].id+")>更新</a>";
 					tbody0+="</td>";
 					
 					tbody0+="<td>";	
-					tbody0+="<a href='javascript:void(0)' onclick=funCalendarDelete()>删除</a>";
+					tbody0+="<a href='javascript:void(0)' onclick=funNodeDelete("+msg[i].id+")>删除</a>";
 					tbody0+="</td>";
 
 					tbody0+="</tr>";					
@@ -87,6 +184,11 @@ $(document).ready(function(){
 	
 	//delete
 	//update
+	//select one
+	$("#btnNodeSelectOne").click(function(){
+		funNodeSelectOne();
+	});
+	
 	//select all
 	$("#btnNodeSelectAll").click(function(){
 		funNodeSelectAll();
