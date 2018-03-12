@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
-public class NodeControl {
+public class NodeController {
     @Autowired
     private NodeService nodeService;
 
