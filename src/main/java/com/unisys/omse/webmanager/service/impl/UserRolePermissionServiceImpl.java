@@ -18,4 +18,5 @@ public class UserRolePermissionServiceImpl implements UserRolePermissionService 
     public List<ViewUserRolePermission> UserRolePermissionSelectAll(String num) {
         return userRolePermissionDao.UserRolePermissionSelectAll(num);
     }
+
 }
