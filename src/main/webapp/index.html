@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="utf-8">
-		<title>DevOOPS</title>
+		<title>欢迎使用节点管理平台</title>
 		<meta name="description" content="description">
 		<meta name="author" content="DevOOPS">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,7 +70,7 @@
 		<div id="main" class="container-fluid">
 			<div class="row">
 				<div id="sidebar-left" class="col-xs-2 col-sm-2">
-					<ul class="nav main-menu">
+					<ul class="nav main-menu" id="menuUser">
 						<li>
 							<a href="bu/userList.html" class="active ajax-link">
 								<i class="fa fa-users"></i>
@@ -113,9 +113,9 @@
 		<script src="devoops/plugins/justified-gallery/jquery.justifiedgallery.min.js"></script>
 		<script src="devoops/plugins/tinymce/tinymce.min.js"></script>
 		<script src="devoops/plugins/tinymce/jquery.tinymce.min.js"></script>
+		
+		<script src="js/shirofilter.js"></script>
 		<!-- All functions for this theme + document.ready processing -->
 		<script src="devoops/js/devoops.js"></script>
-	
 	</body>
-
 </html>

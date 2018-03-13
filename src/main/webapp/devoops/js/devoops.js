@@ -2427,6 +2427,7 @@ $(document).ready(function () {
 		var button = $('<div class="text-center"><a href="index.html" class="btn btn-primary">Unlock</a></div>');
 		OpenModalBox(header, form, button);
 	});
+	shiroFilter();
 });
 
 

@@ -1,8 +1,12 @@
 package com.unisys.omse.webmanager.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.unisys.omse.webmanager.po.TblNews;
 import com.unisys.omse.webmanager.service.NewsService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +80,6 @@ public class NewsController {
     private Object newsSelectCurrentNews(HttpServletRequest req){
         return newsService.newsSelectCurrentNews();
     }
-
 
     //newsSelectAllFromFastJson
     @RequestMapping("/newsSelectAllFromFastJson")

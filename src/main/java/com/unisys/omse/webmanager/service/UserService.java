@@ -19,4 +19,6 @@ public interface UserService {
     public int userLogin(ViewUser viewUser);
     //6模糊查询
     public List<ViewUser> userSearchALL(ViewUser viewUser, int whichNum);
+    //5获取总条数
+    public int getCount();
 }

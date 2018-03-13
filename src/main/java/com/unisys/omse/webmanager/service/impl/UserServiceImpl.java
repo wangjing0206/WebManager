@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
         whichNum=whichNum<1 ? 1 : whichNum;
         return userDao.userSearchALL(viewUser);
     }
+
+    @Override
+    public int getCount() {
+        return userDao.getCount();
+    }
 }
