@@ -2,6 +2,8 @@ package com.unisys.omse.webmanager.controller;
 
 import com.unisys.omse.webmanager.po.TblNode;
 import com.unisys.omse.webmanager.service.NodeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,9 @@ import java.util.List;
 
 @RestController
 public class NodeController {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private NodeService nodeService;
 
@@ -26,6 +31,16 @@ public class NodeController {
         String status=req.getParameter("status");
         String laststarttime=req.getParameter("laststarttime");
         String laststoptime=req.getParameter("laststoptime");
+
+        logger.error("nodeInsert.nodeid"+nodeid);
+        logger.error("nodeInsert.nodename"+nodename);
+        logger.error("nodeInsert.configid"+configid);
+        logger.error("nodeInsert.ipaddress"+ipaddress);
+        logger.error("nodeInsert.status"+status);
+        logger.error("nodeInsert.laststarttime"+laststarttime);
+        logger.error("nodeInsert.laststoptime"+laststoptime);
+
+
         if(laststarttime.indexOf("T")>-1){
             laststarttime = laststarttime.replaceAll("T"," ");
         }
@@ -38,8 +53,10 @@ public class NodeController {
             tblNode = new TblNode(
                     Integer.parseInt(nodeid),nodename,
                     Integer.parseInt(configid),ipaddress,status,
-                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststarttime),
-                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststoptime)
+//                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststarttime),
+//                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststoptime)
+                    new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststarttime),
+                    new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststoptime)
             );
         } catch (ParseException e) {
             e.printStackTrace();
@@ -66,12 +83,21 @@ public class NodeController {
         String laststoptime=req.getParameter("laststoptime");
         TblNode tblNode=null;
 
+        if(laststarttime.indexOf("T")>-1){
+            laststarttime = laststarttime.replaceAll("T"," ");
+        }
+        if(laststoptime.indexOf("T")>-1){
+            laststoptime = laststoptime.replaceAll("T"," ");
+        }
+
         try {
             tblNode = new TblNode(
-                    0,nodename,
-                    0,ipaddress,status,
-                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststarttime),
-                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststoptime)
+                    Integer.parseInt(nodeid),nodename,
+                    Integer.parseInt(configid),ipaddress,status,
+//                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststarttime),
+//                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststoptime)
+                    new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststarttime),
+                    new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststoptime)
             );
             tblNode.setId(Integer.parseInt(id));
         } catch (ParseException e) {
