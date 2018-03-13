@@ -18,7 +18,7 @@ function userLogin() {
         data:$("#frmLogin").serialize(),
         success:function(msg){
             $('#numHtml').html('');
-            $('#passwordHtml').html('*');
+            $('#passwordHtml').html('');
             console.log(msg);
             if (msg==1) {
                 loginSuccess();
