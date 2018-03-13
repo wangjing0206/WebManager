@@ -30,9 +30,9 @@ public interface UserDao {
     @Select("select count(*) from tblUsers where isDeleted=0 and num =#{num} and password=#{password}")
     public int userLogin(ViewUser viewUser);
     //6searchAll 需满足分页todo
-    @Select("select * from viewUsers where isDeleted=0 and num like #{num} and userName like #{userName} and " +
-            "roleName like #{roleName} and groupName like #{groupName} order by id desc limit 0,10 ")
-    public List<ViewUser> userSearchALL(ViewUser viewUser);
+    @Select("select * from viewUsers where isDeleted=0 and num like #{ViewUser.num} and userName like #{ViewUser.userName} and " +
+            "roleName like #{ViewUser.roleName} and groupName like #{ViewUser.groupName} order by id desc limit #{whichNum},10 ")
+    public List<ViewUser> userSearchALL(@Param("ViewUser") ViewUser viewUser, @Param("whichNum") int whichNum);
     //查询条数
     @Select("select count(*) from tblUsers where isDeleted =0")
     public int getCount();

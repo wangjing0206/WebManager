@@ -15,9 +15,9 @@ import java.util.Date;
 @RestController
 public class UserController {
     @Autowired
-    private UserService userService;
+    public UserService userService;
     @RequestMapping(value="/userInsert")
-    private Object userInsert(HttpServletRequest req){
+    public Object userInsert(HttpServletRequest req){
         String userName=req.getParameter("userName");
         //String password=req.getParameter("password");
         String password="123456";
@@ -44,12 +44,12 @@ public class UserController {
         return userService.userInsert(viewUser);
     }
     @RequestMapping(value="/userDelete")
-    private Object userDelete(HttpServletRequest req){
+    public Object userDelete(HttpServletRequest req){
         String id=req.getParameter("id");
         return userService.userDelete(Integer.parseInt(id));
     }
     @RequestMapping("/userUpdate")
-    private Object userUpdate(HttpServletRequest req){
+    public Object userUpdate(HttpServletRequest req){
         //0定义和收值
         String id=req.getParameter("id");
         String userName=req.getParameter("userName");
@@ -78,19 +78,19 @@ public class UserController {
         return userService.userUpdate(viewUser);
     }
     @RequestMapping(value="/userSelectOne")
-    private Object userSelectOne(HttpServletRequest req){
+    public Object userSelectOne(HttpServletRequest req){
         String id=req.getParameter("id");
         ViewUser viewUser=new ViewUser();
         viewUser.setId(Integer.parseInt(id));
         return userService.userSelectOne(viewUser);
     }
     @RequestMapping(value="/userSelectAll")
-    private Object userSelectAll(HttpServletRequest req){
+    public Object userSelectAll(HttpServletRequest req){
         String whichNum=req.getParameter("whichNum");
         return userService.userSelectAll(Integer.parseInt(whichNum));
     }
     @RequestMapping(value="/userSearchAll")
-    private Object userSearchAll(HttpServletRequest req){
+    public Object userSearchAll(HttpServletRequest req){
         String num="%"+req.getParameter("num")+"%";
         String userName="%"+req.getParameter("userName")+"%";
         String groupName="%"+req.getParameter("groupName")+"%";
@@ -104,12 +104,12 @@ public class UserController {
         return userService.userSearchALL(viewUser,Integer.parseInt(whichNum));
     }
     @RequestMapping(value="/userSelectAllFromFastJson")
-    private Object userSelectAllFromFastJson(HttpServletRequest req){
+    public Object userSelectAllFromFastJson(HttpServletRequest req){
         String whichNum=req.getParameter("whichNum");
         return JSON.toJSONString(userService.userSelectAll(Integer.parseInt(whichNum)));
     }
     @RequestMapping(value="/parseJson")
-    private Object parseJson(HttpServletRequest req){
+    public Object parseJson(HttpServletRequest req){
         String whichNum=req.getParameter("whichNum");
         String json= JSON.toJSONString(userService.userSelectAll(Integer.parseInt(whichNum)));
         //json转换成数组，取第一个，转成String
@@ -118,7 +118,7 @@ public class UserController {
         return userName;
     }
     @RequestMapping(value="/userLogin")
-    private Object userLogin(HttpServletRequest req){
+    public Object userLogin(HttpServletRequest req){
         String num=req.getParameter("num");
         String password=req.getParameter("password");
         ViewUser viewUser=new ViewUser();;
@@ -127,7 +127,7 @@ public class UserController {
         return userService.userLogin(viewUser);
     }
     @RequestMapping(value="/getCount")
-    private Object getCount(HttpServletRequest req){
+    public Object getCount(HttpServletRequest req){
         return userService.getCount();
     }
 }

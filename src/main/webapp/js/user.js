@@ -87,6 +87,7 @@ $(document).ready(function(){
         $('#userName1').val("");
         $('#groupName1').val("");
         $('#roleName1').val("");
+        $('#whichNum').val("");
 		userSelectAll(1);
 	});
     $("#userSearchAll").click(function(){
