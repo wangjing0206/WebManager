@@ -1,7 +1,9 @@
 package com.unisys.omse.webmanager.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.unisys.omse.webmanager.filter.PasswordHelper;
 import com.unisys.omse.webmanager.po.ViewUser;
+import com.unisys.omse.webmanager.po.ViewUserRolePermission;
 import com.unisys.omse.webmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +17,24 @@ import java.util.Date;
 @RestController
 public class UserController {
     @Autowired
-    public UserService userService;
+    private UserService userService;
     @RequestMapping(value="/userInsert")
     public Object userInsert(HttpServletRequest req){
+
         String userName=req.getParameter("userName");
-        //String password=req.getParameter("password");
-        String password="123456";
         String tel=req.getParameter("tel");
         String num=req.getParameter("num");
+
+        //encryptPassword
+        PasswordHelper passwordHelper = new PasswordHelper();
+        String password=req.getParameter("userPassword");
+        ViewUserRolePermission user = new ViewUserRolePermission();
+        user.setNum(num);
+        user.setUserPassword(password);
+        passwordHelper.encryptPassword(user);
+        System.out.println("origin password:"+password);
+        password = user.getUserPassword();
+        System.out.println("Encrypt password:"+password);
         String sex=req.getParameter("sex");
         String roleId=req.getParameter("roleId");
         String groupId=req.getParameter("groupId");

@@ -25,7 +25,7 @@ public class NewsController {
     private NewsService newsService;
 
     @RequestMapping("/newsInsert")
-    private Object newsInert(HttpServletRequest req){
+    public Object newsInert(HttpServletRequest req){
         //0定义和收值
         String title = req.getParameter("title");
         String content = req.getParameter("content");
@@ -45,13 +45,13 @@ public class NewsController {
     }
 
     @RequestMapping("/newsDelete")
-    private Object newsDelete(HttpServletRequest req){
+    public Object newsDelete(HttpServletRequest req){
         String  id = req.getParameter("id");
         return newsService.newsDelete(Integer.parseInt(id));
     }
 
     @RequestMapping("/newsUpdate")
-    private Object newsUpdate(HttpServletRequest req){
+    public Object newsUpdate(HttpServletRequest req){
         String id = req.getParameter("id");
         TblNews tblNews = newsService.newsSelectById(Integer.parseInt(id));
 
@@ -71,26 +71,26 @@ public class NewsController {
     }
 
     @RequestMapping("/newsSelectAll")
-    private Object newsSelectAll(HttpServletRequest req){
+    public Object newsSelectAll(HttpServletRequest req){
         String whichNum = req.getParameter("whichNum");
         return newsService.newsSelectAll(Integer.parseInt(whichNum));
     }
 
     @RequestMapping("/newsSelectCurrentNews")
-    private Object newsSelectCurrentNews(HttpServletRequest req){
+    public Object newsSelectCurrentNews(HttpServletRequest req){
         return newsService.newsSelectCurrentNews();
     }
 
     //newsSelectAllFromFastJson
     @RequestMapping("/newsSelectAllFromFastJson")
-    private Object newsSelectAllFromFastJson(HttpServletRequest req){
+    public Object newsSelectAllFromFastJson(HttpServletRequest req){
         //0定义和收值
         String whichNum = req.getParameter("whichNum");
         return JSON.toJSONString(newsService.newsSelectAll(Integer.parseInt(whichNum)));
     }
 
     @RequestMapping("/newsSelectById")
-    private Object newsSelectById(HttpServletRequest req){
+    public Object newsSelectById(HttpServletRequest req){
         String id = req.getParameter("id");
         logger.info("id:"+id);
         return newsService.newsSelectById(Integer.parseInt(id));

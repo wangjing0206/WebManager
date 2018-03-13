@@ -66,26 +66,14 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.31</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
+
 		<!-- 对jsp的支持 -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<!--<scope>provided</scope>-->
 		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>1.7.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>1.7.4</version>
-		</dependency>
+
 		<!--Shiro-->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -98,7 +86,13 @@
 			<artifactId>shiro-redis</artifactId>
 			<version>2.8.8</version>
 		</dependency>
-	</dependencies>
+
+		<!--AOP-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

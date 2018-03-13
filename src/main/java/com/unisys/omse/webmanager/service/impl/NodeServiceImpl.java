@@ -42,6 +42,6 @@ public class NodeServiceImpl implements NodeService{
     @Override
     public List<TblNode> nodeSelectAll(int whichNum) {
         whichNum=whichNum < 1? 1:whichNum;
-        return nodeDAO.nodeSelectAll(whichNum);
+        return nodeDAO.nodeSelectAll((whichNum-1)*10);
     }
 }
