@@ -1,14 +1,18 @@
 var tbody0;
-function userSelectAll(){
+var pbody;
+function userSelectAll(whichNum){
     $('#userUpdate').hide();
     $('#userInsert').show();
-
+    if($('#whichNum').val()==whichNum){
+        return false;
+    }
+    $('#whichNum').val(whichNum);
 			$.ajax({
 			type:"get",
 			url:"/userSelectAllFromFastJson",
 			async:true,
 			timeout:10000,
-			data:"whichNum="+1,
+			data:"whichNum="+whichNum,
 			dataType:"json",
 			success:function(msg){
 				console.log(msg);
@@ -50,7 +54,8 @@ function userSelectAll(){
 }
 $(document).ready(function(){
 	//加载页面就查询
-    window.userSelectAll();
+    userSelectAll(1);
+    getCount();
 	//insert
 	$("#frmUser").submit(function(){
 			$.ajax({
@@ -63,7 +68,7 @@ $(document).ready(function(){
 				console.log(msg);
                 if (msg==1) {
                     window.alert("添加成功");
-                    userSelectAll();
+                    userSelectAll(1);
                 }
 			},
 			error:function(msg){
@@ -82,7 +87,7 @@ $(document).ready(function(){
         $('#userName1').val("");
         $('#groupName1').val("");
         $('#roleName1').val("");
-		userSelectAll();
+		userSelectAll(1);
 	});
     $("#userSearchAll").click(function(){
         $('#userUpdate').hide();
@@ -196,7 +201,7 @@ function userDelete(id){
                 console.log(msg);
                 if (msg==1) {
                     window.alert("删除成功");
-                    userSelectAll();
+                    userSelectAll(1);
 
                 }
             },
@@ -246,7 +251,7 @@ function userUpdate(){
             console.log(msg);
             if (msg==1) {
                 window.alert("修改成功");
-                userSelectAll();
+                userSelectAll(1);
             }
         },
         error:function(msg){
@@ -254,5 +259,46 @@ function userUpdate(){
             console.log(msg)
         }
     });
-
+}
+function getCount(){
+    $.ajax({
+        type:"get",
+        url:"/getCount",
+        async:true,
+        timeout:10000,
+        data:{},
+        success:function(msg){
+            pbody="<ul class='pagination'><li><a href='javascript:void(0)' onclick='userSelectAll(1)'>首页</a></li><li><a href='javascript:void(0)' onclick='userSelectAllPageUp()'>上一页</a></li>";
+            console.log(msg);
+            var page=Math.ceil(msg/10);
+            $('#count').val(page);
+            if (page>0) {
+                for(var i=1;i<page+1;i++){
+                    pbody+="<li><a href='javascript:void(0)' onclick='userSelectAll("+i+")'>"+i+"</a></li>";
+                    if(i==10){
+                        break;
+                    }
+                }
+            }else {
+                pbody+="<li><a href='javascript:void(0)' onclick='userSelectAll("+1+")'>1</a></li>";
+            }
+            pbody+="<li><a href='javascript:void(0)' onclick='userSelectAllPageDown()'>下一页</a></li><li><a href='javascript:void(0)' onclick='userSelectAll("+page+")'>尾页</a></li></ul>";
+            $("#pbody").html(pbody);
+        },
+        error:function(msg){
+            console.log(msg)
+        }
+    });
+}
+function userSelectAllPageUp(){
+    var whichNum=$('#whichNum').val()-1>0?$('#whichNum').val()-1:1;
+    userSelectAll(whichNum);
+}
+function userSelectAllPageDown(){
+    var page=$('#count').val();
+    var whichNum=parseInt($('#whichNum').val())+1;
+    if(whichNum>page){
+        whichNum=page;
+    }
+    userSelectAll(whichNum);
 }

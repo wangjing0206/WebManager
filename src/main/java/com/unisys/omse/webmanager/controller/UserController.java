@@ -126,4 +126,8 @@ public class UserController {
         viewUser.setPassword(password);
         return userService.userLogin(viewUser);
     }
+    @RequestMapping(value="/getCount")
+    private Object getCount(HttpServletRequest req){
+        return userService.getCount();
+    }
 }

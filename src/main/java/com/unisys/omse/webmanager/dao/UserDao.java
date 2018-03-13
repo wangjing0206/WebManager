@@ -17,8 +17,8 @@ public interface UserDao {
     @Update("update tblUsers set isDeleted = 1 where id =#{id}")
     public int userDelete(int id);
     //2update
-    @Update("update tblUsers set userName=#{userName},password=#{password},tel=#{tel},num=#{num},sex=#{sex},roleId=#{roleId}," +
-            "groupId=#{groupId},isDeleted=#{isDeleted},createDate=#{createDate},remark=#{remark} where id=#{id}")
+    @Update("update tblUsers set userName=#{userName},tel=#{tel},num=#{num},sex=#{sex},roleId=#{roleId}," +
+            "groupId=#{groupId},remark=#{remark} where id=#{id}")
     public int userUpdate(ViewUser viewUser);
     //3selectOne
     @Select("select * from viewUsers where id =#{id} limit 1")
@@ -26,11 +26,14 @@ public interface UserDao {
     //4selectAll 需满足分页
     @Select("select * from viewUsers where isDeleted=0 order by id desc limit #{whichNum},10")
     public List<ViewUser> userSelectALL(int whichNum);
-    //登陆验证
-    @Select("select count(*) from tblUsers where num =#{num} and password=#{password}")
+    //5登陆验证
+    @Select("select count(*) from tblUsers where isDeleted=0 and num =#{num} and password=#{password}")
     public int userLogin(ViewUser viewUser);
-    //searchAll 需满足分页
+    //6searchAll 需满足分页todo
     @Select("select * from viewUsers where isDeleted=0 and num like #{num} and userName like #{userName} and " +
             "roleName like #{roleName} and groupName like #{groupName} order by id desc limit 0,10 ")
     public List<ViewUser> userSearchALL(ViewUser viewUser);
+    //查询条数
+    @Select("select count(*) from tblUsers where isDeleted =0")
+    public int getCount();
 }

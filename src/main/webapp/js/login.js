@@ -19,7 +19,7 @@ function userLogin() {
         data:$("#frmLogin").serialize(),
         success:function(msg){
             $('#numHtml').html('');
-            $('#passwordHtml').html('*');
+            $('#passwordHtml').html('');
             console.log(msg);
             var jsonData = JSON.parse(msg);   
             console.log(jsonData.msg);
