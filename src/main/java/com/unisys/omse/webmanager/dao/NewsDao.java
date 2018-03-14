@@ -1,5 +1,6 @@
 package com.unisys.omse.webmanager.dao;
 
+import com.unisys.omse.webmanager.po.NewsStatistic;
 import com.unisys.omse.webmanager.po.TblNews;
 import org.apache.ibatis.annotations.*;
 
@@ -32,5 +33,9 @@ public interface NewsDao {
     //selectById
     @Select("select * from tblnews where id=#{id} limit 1")
     public TblNews newsSelectById(int id);
+
+    //newsStatistic
+    @Select("select currentNews, count(*) as num from tblnews t group by currentNews")
+    public List<NewsStatistic> newsStatistic();
 
 }

@@ -1,5 +1,6 @@
 package com.unisys.omse.webmanager.service;
 
+import com.unisys.omse.webmanager.po.NewsStatistic;
 import com.unisys.omse.webmanager.po.TblNews;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface NewsService {
     public List<TblNews> newsSelectAll(int whichNum);
     //selectById
     public TblNews newsSelectById(int id);
+    //statistic
+    public List<NewsStatistic> newsStatistic();
+
 }

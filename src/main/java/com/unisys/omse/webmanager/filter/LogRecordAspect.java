@@ -24,7 +24,7 @@ public class LogRecordAspect {
     }
 
     @Around("excudeService()")
-    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+    public Object doAround(ProceedingJoinPoint pjp){
 
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
@@ -37,7 +37,14 @@ public class LogRecordAspect {
         logger.info("请求开始, 各个参数, url: {}, method: {}, uri: {}, params: {}", url, method, uri, queryString);
 
         // result的值就是被拦截方法的返回值
-        Object result = pjp.proceed();
+        Object result = null;
+        try {
+            result = pjp.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+
 
         logger.info("请求结束，controller的返回值是 "+result);
         return result;
