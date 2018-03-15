@@ -17,7 +17,7 @@ function funNodeUpdate(id,nodeid,nodename,configid,ipaddress,status,laststarttim
 }
 
 function funNodeDelete(id){
-	window.alert(id)
+	// window.alert(id)
 
 	$.ajax({
 		type:"get",
