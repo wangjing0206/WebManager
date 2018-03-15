@@ -46,14 +46,16 @@ public class NewsController {
                 updateDate );
         int retVal = newsService.newsInsert(tblNews);
 
-        webSocketServer.sendMessageToClients("系统添加了新的公告！");
+        webSocketServer.sendMessageToClients("insert");
         return retVal ;
     }
 
     @RequestMapping("/newsDelete")
     public Object newsDelete(HttpServletRequest req){
         String  id = req.getParameter("id");
-        return newsService.newsDelete(Integer.parseInt(id));
+        int retVal =newsService.newsDelete(Integer.parseInt(id));
+        webSocketServer.sendMessageToClients("delete");
+        return retVal;
     }
 
     @RequestMapping("/newsUpdate")
@@ -73,7 +75,9 @@ public class NewsController {
         tblNews.setCurrentNews(Integer.parseInt(currentNews));
         tblNews.setUpdateDate(updateDate);
 
-        return newsService.newsUpdate(tblNews);
+        int retVal =newsService.newsUpdate(tblNews);
+        webSocketServer.sendMessageToClients("update");
+        return retVal;
     }
 
     @RequestMapping("/newsSelectAll")
@@ -100,6 +104,11 @@ public class NewsController {
         String id = req.getParameter("id");
         logger.info("id:"+id);
         return newsService.newsSelectById(Integer.parseInt(id));
+    }
+
+    @RequestMapping("/newsStatistic")
+    public Object newsStatistic(HttpServletRequest req){
+        return newsService.newsStatistic();
     }
 
 }

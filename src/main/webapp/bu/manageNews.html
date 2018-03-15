@@ -32,6 +32,9 @@
 			<input id="id" name="id" type="hidden">
 			<button type="button" class="btn btn-default" id="btnSelectAll" name="btnSelectAll">查询</button>
 		</form>
+		
+		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    	<div id="newsChart" style="height:400px"></div>
 	</div>
 	<div class="col-md-6 column">
 		<table class="table">
@@ -58,5 +61,9 @@
 			</tbody>
 		</table>
 	</div>
+	<div id="newsDialog" title="基本的对话框">
+  		<p id="dialogContent"></p>
+	</div>
 </div>
-<script src="../js/bg_manageNews.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/echarts.js"></script>
+<script src="../js/bg_manageNews.js"></script>

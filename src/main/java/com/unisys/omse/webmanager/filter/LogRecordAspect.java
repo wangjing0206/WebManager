@@ -1,4 +1,5 @@
 package com.unisys.omse.webmanager.filter;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,12 +19,13 @@ public class LogRecordAspect {
     private static final Logger logger = LoggerFactory.getLogger(LogRecordAspect.class);
 
     // 定义切点Pointcut
-    @Pointcut("execution(public * com.unisys.omse.webmanager.controller.*.*(..))")
+    @Pointcut("execution(* com.unisys.omse.webmanager.controller.*.*(..))")
     public void excudeService() {
     }
 
     @Around("excudeService()")
-    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+    public Object doAround(ProceedingJoinPoint pjp){
+
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest request = sra.getRequest();
@@ -32,13 +34,19 @@ public class LogRecordAspect {
         String method = request.getMethod();
         String uri = request.getRequestURI();
         String queryString = request.getQueryString();
-        logger.info("请求开始, 各个参数, url: {"+url+"}, method: {}, uri: {}, params: {}", url, method, uri, queryString);
+        logger.info("请求开始, 各个参数, url: {}, method: {}, uri: {}, params: {}", url, method, uri, queryString);
 
         // result的值就是被拦截方法的返回值
-        Object result = pjp.proceed();
-        //Gson gson = new Gson();
-//        logger.info("请求结束，controller的返回值是 " + gson.toJson(result));
-        logger.info("请求结束，controller的返回值是 " + result);
+        Object result = null;
+        try {
+            result = pjp.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+
+
+        logger.info("请求结束，controller的返回值是 "+result);
         return result;
     }
 }
