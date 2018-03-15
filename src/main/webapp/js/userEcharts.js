@@ -11,6 +11,9 @@ function countToCharts(msg){
     var seriesDataForSex=new Array();
     var xAxisDataForRole=new Array();
     var seriesDataForRole=new Array();
+    $('#userForSex').show();
+    $('#userForGroup').show();
+    $('#userForRole').show();
     for(var i=1;i<msg.length;i++){
         if(msg[i].key=='sex'){
             xAxisDataForSex.push(msg[i].value+'('+msg[i].count+')人');
@@ -121,9 +124,7 @@ function countToCharts(msg){
             };
             // 为echarts对象加载数据
             debugger
-            $('#userForSex').show();
-            $('#userForGroup').show();
-            $('#userForRole').show();
+
             myChartForSex.setOption(optionForSex);
             myChartForGroup.setOption(optionForGroup);
             myChartForRole.setOption(optionForRole);
