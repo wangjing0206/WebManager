@@ -9,6 +9,6 @@ import java.util.List;
 
 @Mapper
 public interface UserRolePermissionDao {
-    @Select("select * from viewuserrolepermission where num = #{num}")
+    @Select("select * from viewuserrolepermission where  isDeleted=0 and num = #{num}")
     public List<ViewUserRolePermission> UserRolePermissionSelectAll(String num);
 }

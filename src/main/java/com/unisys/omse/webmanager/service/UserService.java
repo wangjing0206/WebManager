@@ -14,6 +14,7 @@ public interface UserService {
     public int userUpdate(ViewUser viewUser);
     //3selectOne
     public ViewUser userSelectOne(ViewUser viewUser);
+    public ViewUser userSelectByNum(String num);
     //4selectAll
     public List<ViewUser> userSelectAll(int whichNum);
     //5登录验证

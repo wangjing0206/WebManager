@@ -1,9 +1,11 @@
 package com.unisys.omse.webmanager.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.unisys.omse.webmanager.po.ViewUser;
 import com.unisys.omse.webmanager.po.ViewUserRolePermission;
 import com.unisys.omse.webmanager.service.NewsService;
 import com.unisys.omse.webmanager.service.UserRolePermissionService;
+import com.unisys.omse.webmanager.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -18,7 +20,8 @@ import java.util.*;
 public class LoginController {
     @Autowired
     private UserRolePermissionService userRolePermissionService;
-
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/userAuthLogin")
     public Object userAuthLogin(HttpServletRequest req) {
         JSONObject jsonObject = new JSONObject();
@@ -29,6 +32,9 @@ public class LoginController {
             subject.login(token);
             jsonObject.put("token", subject.getSession().getId());
             jsonObject.put("msg", "登录成功");
+            ViewUser user=new ViewUser();
+            user=userService.userSelectByNum(req.getParameter("num"));
+            jsonObject.put("user", user);
             System.out.println("2");
         }  catch (Exception e) {
             jsonObject.put("msg", "登录失败");
