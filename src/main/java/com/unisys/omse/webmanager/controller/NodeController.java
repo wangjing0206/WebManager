@@ -2,6 +2,7 @@ package com.unisys.omse.webmanager.controller;
 
 import com.unisys.omse.webmanager.po.TblNode;
 import com.unisys.omse.webmanager.service.NodeService;
+import com.unisys.omse.webmanager.websocket.WebSocketServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import java.util.List;
 public class NodeController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    WebSocketServer webSocketServer;
 
     @Autowired
     private NodeService nodeService;
@@ -61,13 +65,21 @@ public class NodeController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return nodeService.nodeInsert(tblNode);
+
+        int result=nodeService.nodeInsert(tblNode);
+        if(result==1)
+            webSocketServer.sendMessageToClients("Insert Successfully");
+
+        return result;
     }
 
     @RequestMapping("/nodeDelete")
     public Object nodeDelete(HttpServletRequest req) {
         String id=req.getParameter("id");
-        return nodeService.nodeDelete(Integer.parseInt(id));
+        int result=nodeService.nodeDelete(Integer.parseInt(id));
+        if(result==1)
+            webSocketServer.sendMessageToClients("Delete Successfully");
+        return result;
     }
 
     @RequestMapping("/nodeUpdate")
