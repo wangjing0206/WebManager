@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ViewUser userSelectByNum(String num) {
+        return userDao.userSelectByNum(num);
+    }
+
+    @Override
     public List<ViewUser> userSelectAll(int whichNum) {
         whichNum=whichNum<1 ? 1 : whichNum;
         return userDao.userSelectALL((whichNum-1)*10);

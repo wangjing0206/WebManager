@@ -22,8 +22,11 @@ public interface UserDao {
             "groupId=#{groupId},remark=#{remark} where id=#{id}")
     public int userUpdate(ViewUser viewUser);
     //3selectOne
-    @Select("select * from viewUsers where id =#{id} limit 1")
+    @Select("select * from viewUsers where id =#{id} and isDeleted=0 limit 1")
     public ViewUser userSelectOne(ViewUser viewUser);
+    //通过工号查询
+    @Select("select * from viewUsers where num =#{num} and isDeleted=0 limit 1")
+    public ViewUser userSelectByNum(String num);
     //4selectAll 需满足分页
     @Select("select * from viewUsers where isDeleted=0 order by id desc limit #{whichNum},10")
     public List<ViewUser> userSelectALL(int whichNum);

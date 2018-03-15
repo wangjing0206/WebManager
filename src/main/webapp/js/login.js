@@ -25,7 +25,7 @@ function userLogin() {
             console.log(jsonData.msg);
             /*if (msg==1) {*/
            	if (jsonData.msg=="登录成功") {
-                loginSuccess();
+                loginSuccess(jsonData);
             }else{
                 $('#passwordHtml').html("用户名或密码不正确");
             }
@@ -37,6 +37,16 @@ function userLogin() {
     });
 
 }
-function loginSuccess(){
+function loginSuccess(jsonData){
+    var lStorage=window.localStorage;
+    lStorage.setItem('id',jsonData.user.id);
+    lStorage.setItem('userName',jsonData.user.userName);
+    lStorage.setItem('num',jsonData.user.num);
+    lStorage.setItem('tel',jsonData.user.tel);
+    lStorage.setItem('sex',jsonData.user.sex);
+    lStorage.setItem('roleId',jsonData.user.roleId);
+    lStorage.setItem('roleName',jsonData.user.roleName);
+    lStorage.setItem('groupId',jsonData.user.groupId);
+    lStorage.setItem('groupName',jsonData.user.groupName);
     window.location.href="../index.html";
 }
