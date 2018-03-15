@@ -224,7 +224,7 @@ $(document).ready(function(){
             success:function(msg){
             	console.log(msg);
             	if(msg==1){
-             		window.alert("add OK")           		
+             		// window.alert("add OK")
              		funNodeSelectAll();
             	}
         	},
@@ -255,12 +255,12 @@ $(document).ready(function(){
 
 function onMessage(event){
 	if(event.data=="Insert Successfully"){
-		window.alert("Web Socket Receive Insert Message！");
+		// window.alert("Web Socket Receive Insert Message！");
 		option.series[0].data[0]=option.series[0].data[0]+1;
 		myChart.setOption(option);
 	}
 	else if(event.data=="Delete Successfully"){
-		window.alert("Web Socket Receive Delete Message！");
+		// window.alert("Web Socket Receive Delete Message！");
 		option.series[0].data[0]=option.series[0].data[0]-1;
 		myChart.setOption(option);
 	}
