@@ -54,8 +54,8 @@ function userSelectAll(whichNum){
 }
 $(document).ready(function(){
 	//加载页面就查询
-    userSelectAll(1);
     getCount();
+    userSelectAll(1);
 	//insert
 	$("#frmUser").submit(function(){
 			$.ajax({
@@ -87,6 +87,7 @@ $(document).ready(function(){
         $('#userName1').val("");
         $('#groupName1').val("");
         $('#roleName1').val("");
+        $('#whichNum').val("");
 		userSelectAll(1);
 	});
     $("#userSearchAll").click(function(){
@@ -202,7 +203,7 @@ function userDelete(id){
                 if (msg==1) {
                     window.alert("删除成功");
                     userSelectAll(1);
-
+                    getCount();
                 }
             },
             error:function(msg){
@@ -252,6 +253,7 @@ function userUpdate(){
             if (msg==1) {
                 window.alert("修改成功");
                 userSelectAll(1);
+                getCount();
             }
         },
         error:function(msg){
@@ -261,6 +263,7 @@ function userUpdate(){
     });
 }
 function getCount(){
+    debugger
     $.ajax({
         type:"get",
         url:"/getCount",
@@ -268,22 +271,9 @@ function getCount(){
         timeout:10000,
         data:{},
         success:function(msg){
-            pbody="<ul class='pagination'><li><a href='javascript:void(0)' onclick='userSelectAll(1)'>首页</a></li><li><a href='javascript:void(0)' onclick='userSelectAllPageUp()'>上一页</a></li>";
             console.log(msg);
-            var page=Math.ceil(msg/10);
-            $('#count').val(page);
-            if (page>0) {
-                for(var i=1;i<page+1;i++){
-                    pbody+="<li><a href='javascript:void(0)' onclick='userSelectAll("+i+")'>"+i+"</a></li>";
-                    if(i==10){
-                        break;
-                    }
-                }
-            }else {
-                pbody+="<li><a href='javascript:void(0)' onclick='userSelectAll("+1+")'>1</a></li>";
-            }
-            pbody+="<li><a href='javascript:void(0)' onclick='userSelectAllPageDown()'>下一页</a></li><li><a href='javascript:void(0)' onclick='userSelectAll("+page+")'>尾页</a></li></ul>";
-            $("#pbody").html(pbody);
+            countToPage(msg);
+            countToCharts(msg);
         },
         error:function(msg){
             console.log(msg)
@@ -302,3 +292,37 @@ function userSelectAllPageDown(){
     }
     userSelectAll(whichNum);
 }
+function countToPage(msg){
+    $('#totalCount').html(msg[0].count);
+    pbody="<ul class='pagination'><li><a href='javascript:void(0)' onclick='userSelectAll(1)'>首页</a></li><li><a href='javascript:void(0)' onclick='userSelectAllPageUp()'>上一页</a></li>";
+    var page=Math.ceil(msg[0].count/10);
+    $('#count').val(page);
+    if (page>0) {
+        for(var i=1;i<page+1;i++){
+            pbody+="<li><a href='javascript:void(0)' onclick='userSelectAll("+i+")'>"+i+"</a></li>";
+            if(i==10){
+                break;
+            }
+        }
+    }else {
+        pbody+="<li><a href='javascript:void(0)' onclick='userSelectAll("+1+")'>1</a></li>";
+    }
+    pbody+="<li><a href='javascript:void(0)' onclick='userSelectAllPageDown()'>下一页</a></li><li><a href='javascript:void(0)' onclick='userSelectAll("+page+")'>尾页</a></li></ul>";
+    $("#pbody").html(pbody);
+}
+$('#viewType').change(function(){
+    var viewType=$('#viewType').val();
+    if(viewType==1){
+        $('#userForSex').show();
+        $('#userForGroup').hide();
+        $('#userForRole').hide();
+    }else if(viewType==2){
+        $('#userForSex').hide();
+        $('#userForGroup').show();
+        $('#userForRole').hide();
+    }else if(viewType==3){
+        $('#userForSex').hide();
+        $('#userForGroup').hide();
+        $('#userForRole').show();
+    }
+})

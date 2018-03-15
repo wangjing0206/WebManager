@@ -25,11 +25,9 @@ function userLogin() {
             console.log(jsonData.msg);
             /*if (msg==1) {*/
            	if (jsonData.msg=="登录成功") {
-           		window.alert("登录成功");
                 loginSuccess();
             }else{
                 $('#passwordHtml').html("用户名或密码不正确");
-                window.alert("登录失败");
             }
         },
         error:function(msg){

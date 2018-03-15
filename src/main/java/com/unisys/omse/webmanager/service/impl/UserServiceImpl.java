@@ -1,6 +1,7 @@
 package com.unisys.omse.webmanager.service.impl;
 
 import com.unisys.omse.webmanager.dao.UserDao;
+import com.unisys.omse.webmanager.po.Count;
 import com.unisys.omse.webmanager.po.ViewUser;
 import com.unisys.omse.webmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +52,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<ViewUser> userSearchALL(ViewUser viewUser, int whichNum) {
         whichNum=whichNum<1 ? 1 : whichNum;
-        return userDao.userSearchALL(viewUser);
+        return userDao.userSearchALL(viewUser,(whichNum-1)*10);
     }
 
     @Override
-    public int getCount() {
+    public List<Count> getCount() {
         return userDao.getCount();
     }
 }

@@ -52,5 +52,5 @@ function send(data) {
 
 //发送消息
 function onMessage(event) {
-    console.log(event.data);
+	console.log(event.data);
 }

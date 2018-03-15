@@ -1,6 +1,7 @@
 package com.unisys.omse.webmanager.service.impl;
 
 import com.unisys.omse.webmanager.dao.NewsDao;
+import com.unisys.omse.webmanager.po.NewsStatistic;
 import com.unisys.omse.webmanager.po.TblNews;
 import com.unisys.omse.webmanager.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,9 @@ public class NewsServiceImpl implements NewsService {
     //selectById
     public TblNews newsSelectById(int id){
         return newsDao.newsSelectById(id);
+    }
+
+    public List<NewsStatistic> newsStatistic(){
+        return newsDao.newsStatistic();
     }
 }
