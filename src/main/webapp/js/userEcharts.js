@@ -123,8 +123,6 @@ function countToCharts(msg){
                 ]
             };
             // 为echarts对象加载数据
-            debugger
-
             myChartForSex.setOption(optionForSex);
             myChartForGroup.setOption(optionForGroup);
             myChartForRole.setOption(optionForRole);
