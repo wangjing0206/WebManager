@@ -1,5 +1,6 @@
 package com.unisys.omse.webmanager.service;
 
+import com.unisys.omse.webmanager.po.Count;
 import com.unisys.omse.webmanager.po.ViewUser;
 
 import java.util.List;
@@ -20,5 +21,5 @@ public interface UserService {
     //6模糊查询
     public List<ViewUser> userSearchALL(ViewUser viewUser, int whichNum);
     //5获取总条数
-    public int getCount();
+    public List<Count> getCount();
 }

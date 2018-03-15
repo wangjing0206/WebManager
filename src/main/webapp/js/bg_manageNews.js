@@ -1,5 +1,6 @@
-var tbody0;
 
+
+var tbody0;
 function funNewsSelectAll() {
 	$('#btnUpdate').hide();
     $('#btnInsert').show();
@@ -11,7 +12,6 @@ function funNewsSelectAll() {
 		data: "whichNum=" + 1,
 		dataType: "json",
 		success: function(msg) {
-			console.log(msg);
 			tbody0 = "";
 			for(var i = 0; i < msg.length; i++) {
 				console.log(msg[i].content);
@@ -83,8 +83,16 @@ $(document).ready(function() {
 
 	funNewsSelectAll();
 	TinyMCEStart('#wysiwig_simple', null);
-
+	
+	websocket.onmessage = function (event) {
+    	onMessage(event);
+	}
+	
 });
+
+function onMessage(event){
+	window.alert("您有新的公告！");
+}
 
 function funDelete(id0) {
 	if(window.confirm("您确信要删除吗?")) {

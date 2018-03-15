@@ -1,6 +1,7 @@
 package com.unisys.omse.webmanager.service.impl;
 
 import com.unisys.omse.webmanager.dao.UserDao;
+import com.unisys.omse.webmanager.po.Count;
 import com.unisys.omse.webmanager.po.ViewUser;
 import com.unisys.omse.webmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int getCount() {
+    public List<Count> getCount() {
         return userDao.getCount();
     }
 }

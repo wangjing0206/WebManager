@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.unisys.omse.webmanager.po.TblNews;
 import com.unisys.omse.webmanager.service.NewsService;
+import com.unisys.omse.webmanager.websocket.WebSocketServer;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
@@ -13,13 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @RestController
 public class NewsController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-
+    @Resource
+    WebSocketServer webSocketServer;
 
     @Autowired
     private NewsService newsService;
@@ -41,7 +44,10 @@ public class NewsController {
                 Integer.parseInt(currentNews),
                 createDate,
                 updateDate );
-        return newsService.newsInsert(tblNews);
+        int retVal = newsService.newsInsert(tblNews);
+
+        webSocketServer.sendMessageToClients("系统添加了新的公告！");
+        return retVal ;
     }
 
     @RequestMapping("/newsDelete")
