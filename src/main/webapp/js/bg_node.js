@@ -41,7 +41,6 @@ function funNodeDelete(id){
 
 var tbody0="";
 function funNodeSelectOne(){
-	//window.alert("我是菜鸟我怕谁");
 	$.ajax({
 		type:"get",
 		url:"/nodeSelectOne",
@@ -167,14 +166,22 @@ function funNodeSelectAll(){
 
 }
 
+var option;
+var myChart;
+
 function funInit(){
 	$("#btnNodeInsert").show()
 	$("#btnNodeSelectAll").show()
 	$("#btnNodeUpdate").hide()
+
+//	option.series[0].data[0]=100;
+//	// 为echarts对象加载数据 
+//  myChart.setOption(option); 
+
 }
 
+
 $(document).ready(function(){
-	
 
 	funInit();
 
@@ -239,4 +246,26 @@ $(document).ready(function(){
 	$("#btnNodeSelectAll").click(function(){
 		funNodeSelectAll();
 	});
+
+	websocket.onmessage = function (event) {
+    	onMessage(event);
+	}
+
 });
+
+function onMessage(event){
+	if(event.data=="Insert Successfully"){
+		window.alert("Web Socket Receive Insert Message！");
+		option.series[0].data[0]=option.series[0].data[0]+1;
+		myChart.setOption(option);
+	}
+	else if(event.data=="Delete Successfully"){
+		window.alert("Web Socket Receive Delete Message！");
+		option.series[0].data[0]=option.series[0].data[0]-1;
+		myChart.setOption(option);
+	}
+	else	
+		window.alert(event.data);
+}
+
+
