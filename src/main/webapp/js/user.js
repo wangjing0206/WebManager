@@ -69,6 +69,7 @@ $(document).ready(function(){
                 if (msg==1) {
                     window.alert("添加成功");
                     userSelectAll(1);
+                    getCount();
                 }
 			},
 			error:function(msg){
