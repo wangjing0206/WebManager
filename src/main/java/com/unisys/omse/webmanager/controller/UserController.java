@@ -142,4 +142,17 @@ public class UserController {
     public Object getCount(HttpServletRequest req){
         return userService.getCount();
     }
+    @RequestMapping(value="/getCountForSearch")
+    public Object getCountForSearch(HttpServletRequest req){
+        String num="%"+req.getParameter("num")+"%";
+        String userName="%"+req.getParameter("userName")+"%";
+        String groupName="%"+req.getParameter("groupName")+"%";
+        String roleName="%"+req.getParameter("roleName")+"%";
+        ViewUser viewUser=new ViewUser();
+        viewUser.setNum(num);
+        viewUser.setUserName(userName);
+        viewUser.setRoleName(roleName);
+        viewUser.setGroupName(groupName);
+        return userService.getCountForSearch(viewUser);
+    }
 }

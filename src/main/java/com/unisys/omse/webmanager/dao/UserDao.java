@@ -37,9 +37,10 @@ public interface UserDao {
     @Select("select * from viewUsers where isDeleted=0 and num like #{viewUser.num} and userName like #{viewUser.userName} and " +
             "roleName like #{viewUser.roleName} and groupName like #{viewUser.groupName} order by id desc limit #{whichNum},10 ")
     public List<ViewUser> userSearchALL(@Param("viewUser") ViewUser viewUser, @Param("whichNum") int whichNum);
-    //查询条数
-   /* @Select("select count(*) from tblUsers where isDeleted =0")
-    public int getCount();*/
+    //查询条数（模糊查询）
+   @Select("select count(*) from viewUsers where isDeleted=0 and num like #{num} and userName like #{userName} and "+
+           " roleName like #{roleName} and groupName like #{groupName}")
+    public int getCountForSearch(ViewUser viewUser);
     //查询条数
     @Select("SELECT 'count' as 'id','key','总数' as 'value',count(*) as 'count' FROM viewUsers where isDeleted=0" +
             " union (SELECT sex,'sex',case sex when '1' then'男' when '0' then '女' end,count(*) FROM viewUsers  where isDeleted=0 group by sex order by sex desc)" +
