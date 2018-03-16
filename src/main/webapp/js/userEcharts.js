@@ -139,7 +139,6 @@ $(document).ready(function() {
 });
 
 function getCount(){
-    debugger
     $.ajax({
         type:"get",
         url:"/getCount",
