@@ -174,6 +174,10 @@ $(document).ready(function(){
                 if (msg==1) {
                     window.alert("添加成功");
                     $('#whichNum').val(0);
+                    $('#num1').val("");
+                    $('#userName1').val("");
+                    $('#groupName1').val("");
+                    $('#roleName1').val("");
                     userSelectAll(1);
                     getCount();
                 }
