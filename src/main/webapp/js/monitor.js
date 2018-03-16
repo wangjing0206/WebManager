@@ -11,16 +11,16 @@ function funNodeSelectAll(){
             tbody0="";
             for (var i = 0; i < msg.length; i++) {
             	var cellClass="";
-            	var status="";
+            	var img="";
             	if(msg[i].status==1){
             		cellClass="success";
-                    status="OnLine";
+                    img="<image src='../img/on.png'/>";
             	}else{
             		cellClass="danger";
-                    status="OffLine";
+                    img="<image src='../img/off.png'/>";
             	}
-                tbody0+="<tr class='"+cellClass+"'>";
-
+                //tbody0+="<tr class='"+cellClass+"'>";
+                tbody0+="<tr class='info'>";
                 tbody0+="<td>";
                 tbody0+=msg[i].nodeid;
                 tbody0+="</td>";
@@ -38,6 +38,7 @@ function funNodeSelectAll(){
                 tbody0+="</td>";
 
                 tbody0+="<td>";
+                tbody0+=img;
                 tbody0+=status;
                 tbody0+="</td>";
 
