@@ -175,6 +175,7 @@ $(document).ready(function(){
                     window.alert("添加成功");
                     $('#whichNum').val(0);
                     userSelectAll(1);
+                    getCount();
                 }
             },
             error:function(msg){
@@ -220,9 +221,9 @@ function userDelete(id){
                 console.log(msg);
                 if (msg==1) {
                     window.alert("删除成功");
-                    $('#whichNum').val(0);
-                    userSelectAll(1);
-                    getCount();
+                    $('#whichNumForSearch').val(0);
+                    userSearchAll(1);
+                    getCountForSearch();
                 }
             },
             error:function(msg){
@@ -271,9 +272,9 @@ function userUpdate(){
             console.log(msg);
             if (msg==1) {
                 window.alert("修改成功");
-                $('#whichNum').val(0);
-                userSelectAll(1);
-                getCount();
+                $('#whichNumForSearch').val(0);
+                userSearchAll(1);
+                getCountForSearch();
             }
         },
         error:function(msg){
@@ -321,10 +322,11 @@ function countToPage(msg){
                 break;
             }
         }
+        pbody+="<li><a href='javascript:void(0)' onclick='userSelectAllPageDown()'>下一页</a></li><li><a href='javascript:void(0)' onclick='userSelectAll("+page+")'>尾页</a></li></ul>";
     }else {
-        pbody+="<li><a href='javascript:void(0)' onclick='userSelectAll("+1+")'>1</a></li>";
+        pbody="<span style='color: #CC0000;font-size: 16px'>查询不到结果</span>";
     }
-    pbody+="<li><a href='javascript:void(0)' onclick='userSelectAllPageDown()'>下一页</a></li><li><a href='javascript:void(0)' onclick='userSelectAll("+page+")'>尾页</a></li></ul>";
+
     $("#pbody").html(pbody);
 }
 
@@ -368,10 +370,11 @@ function countToPageForSearch(msg){
                 break;
             }
         }
+        pbody+="<li><a href='javascript:void(0)' onclick='userSearchAllPageDown()'>下一页</a></li><li><a href='javascript:void(0)' onclick='userSearchAllPage("+page+")'>尾页</a></li></ul>";
     }else {
-        pbody+="<li><a href='javascript:void(0)' onclick='userSearchAllPage("+1+")'>1</a></li>";
+        pbody="<span style='color: #CC0000;font-size: 16px'>查询不到结果</span>";
     }
-    pbody+="<li><a href='javascript:void(0)' onclick='userSearchAllPageDown()'>下一页</a></li><li><a href='javascript:void(0)' onclick='userSearchAllPage("+page+")'>尾页</a></li></ul>";
+
     $("#pbody").html(pbody);
-    
+
 }
