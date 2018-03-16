@@ -12,9 +12,11 @@ function shiroFilter() {
 				console.log(roles[i]);
 				if(roles[i]=="管理员"){
 					$("#menuUser").show();
+                    $("#menuNews").show();
 				}				
 				if(roles[i]=="普通用户"){
 					$("#menuUser").hide();
+                    $("#menuNews").hide();
 				}
 			}
 		},

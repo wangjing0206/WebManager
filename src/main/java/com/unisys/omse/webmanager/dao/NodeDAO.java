@@ -15,7 +15,7 @@ public interface NodeDAO {
     @Delete("delete from tblNode where id = #{id} limit 1")
     public int nodeDelete(int id);
 
-    @Update("update tblNode set configid=#{configid},status=#{status},laststarttime=#{laststarttime}," +
+    @Update("update tblNode set nodeid=#{nodeid},configid=#{configid},status=#{status},laststarttime=#{laststarttime}," +
             "laststoptime=#{laststoptime} where id=#{id}")
     public int nodeUpdate(TblNode tblNode);
 

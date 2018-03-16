@@ -14,6 +14,7 @@ function countToCharts(msg){
     $('#userForSex').show();
     $('#userForGroup').show();
     $('#userForRole').show();
+    $('#totalCount').html(msg[0].count);
     for(var i=1;i<msg.length;i++){
         if(msg[i].key=='sex'){
             xAxisDataForSex.push(msg[i].value+'('+msg[i].count+')人');
@@ -132,3 +133,42 @@ function countToCharts(msg){
         }
     );
 }
+$(document).ready(function() {
+    //加载页面就查询
+    getCount();
+});
+
+function getCount(){
+    debugger
+    $.ajax({
+        type:"get",
+        url:"/getCount",
+        async:true,
+        timeout:10000,
+        data:{},
+        success:function(msg){
+            console.log(msg);
+            countToCharts(msg);
+        },
+        error:function(msg){
+            console.log(msg)
+        }
+    });
+}
+
+$('#viewType').change(function(){
+    var viewType=$('#viewType').val();
+    if(viewType==1){
+        $('#userForSex').show();
+        $('#userForGroup').hide();
+        $('#userForRole').hide();
+    }else if(viewType==2){
+        $('#userForSex').hide();
+        $('#userForGroup').show();
+        $('#userForRole').hide();
+    }else if(viewType==3){
+        $('#userForSex').hide();
+        $('#userForGroup').hide();
+        $('#userForRole').show();
+    }
+})

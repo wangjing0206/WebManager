@@ -29,11 +29,11 @@
 									</div>
 									<div class="form-group">
 										<label for="laststarttime">上次启动时间</label>
-										<input type="datetime-local" class="form-control" id="laststarttime" name="laststarttime" value="2000-01-01T00:00:00" />
+										<input type="datetime-local" class="form-control" id="laststarttime" name="laststarttime" value="2018-03-13T00:00:00" />
 									</div>
 									<div class="form-group">
 										<label for="laststoptime">上次停止时间</label>
-										<input type="datetime-local" class="form-control" id="laststoptime" name="laststoptime" value="2000-01-01T00:00:00"/>
+										<input type="datetime-local" class="form-control" id="laststoptime" name="laststoptime" value="2018-03-17T09:00:00"/>
 									</div>
 				
 									<!--<div class="form-group">
@@ -80,7 +80,7 @@
 					</div>
 			</div>
 		<!--js-->
-	    <script src="../node_modules/echarts/dist/echarts.js"></script>
+			<script src="../js/echarts.js" ></script>
 <!--
 		<script src="../node_modules/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>-->
@@ -91,7 +91,7 @@
 			// 路径配置
 			require.config({
 				paths: {
-					echarts: '../node_modules/echarts/dist'
+                    echarts: 'http://echarts.baidu.com/build/dist'
 				}
 			});
 			// 加载使用
