@@ -68,6 +68,7 @@ $(document).ready(function(){
 				console.log(msg);
                 if (msg==1) {
                     window.alert("添加成功");
+                    $('#whichNum').val(0);
                     userSelectAll(1);
                     getCount();
                 }
@@ -203,6 +204,7 @@ function userDelete(id){
                 console.log(msg);
                 if (msg==1) {
                     window.alert("删除成功");
+                    $('#whichNum').val(0);
                     userSelectAll(1);
                     getCount();
                 }
@@ -253,6 +255,7 @@ function userUpdate(){
             console.log(msg);
             if (msg==1) {
                 window.alert("修改成功");
+                $('#whichNum').val(0);
                 userSelectAll(1);
                 getCount();
             }
@@ -264,7 +267,6 @@ function userUpdate(){
     });
 }
 function getCount(){
-    debugger
     $.ajax({
         type:"get",
         url:"/getCount",
