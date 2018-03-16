@@ -373,4 +373,5 @@ function countToPageForSearch(msg){
     }
     pbody+="<li><a href='javascript:void(0)' onclick='userSearchAllPageDown()'>下一页</a></li><li><a href='javascript:void(0)' onclick='userSearchAllPage("+page+")'>尾页</a></li></ul>";
     $("#pbody").html(pbody);
+    
 }
