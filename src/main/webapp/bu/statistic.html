@@ -1,10 +1,9 @@
 <div class="row clearfix">
-    <br/>
     <div class="col-md-12 column">
         <div>
             <label>用户信息统计</label>
             <br />
-            <span style="color: #003cb3;font-size: 12px ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共有用户<span style="color: #CC0000 " id="totalCount"></span>人</span>
+            <span style="color: #003cb3;font-size: 16px ">&nbsp;&nbsp;&nbsp;&nbsp;共有用户<span style="color: #CC0000 " id="totalCount"></span>人</span>
             <select id="viewType" name="viewType">
                 <option value="1" selected>按性别分布</option>
                 <option value="2" >按部门分布</option>
@@ -16,14 +15,16 @@
         <div id="userForRole" style="height:200px"></div>
     </div>
 </div>
-<br/>
-<br/>
 <div class="row clearfix">
-    <br/>
     <div class="col-md-12 column">
         <label>公告信息统计</label>
-        <br />
         <div id="newsChart" style="height:400px"></div>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <label>节点信息统计(天)</label>
+        <div id="nodeChart" style="height:400px"></div>
     </div>
 </div>
 <div class="row clearfix">
@@ -33,3 +34,4 @@
 <script src="../js/echarts.js" ></script>
 <script src="../js/userEcharts.js" ></script>
 <script src="../js/newsEcharts.js"></script>
+<script src="../js/nodeEcharts.js"></script>

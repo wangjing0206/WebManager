@@ -1,5 +1,6 @@
 package com.unisys.omse.webmanager.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.unisys.omse.webmanager.po.TblNode;
 import com.unisys.omse.webmanager.service.NodeService;
 import com.unisys.omse.webmanager.websocket.WebSocketServer;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -43,13 +45,18 @@ public class NodeController {
         logger.error("nodeInsert.status"+status);
         logger.error("nodeInsert.laststarttime"+laststarttime);
         logger.error("nodeInsert.laststoptime"+laststoptime);
-
+        Date ltoptime=null;
 
         if(laststarttime.indexOf("T")>-1){
             laststarttime = laststarttime.replaceAll("T"," ");
         }
         if(laststoptime.indexOf("T")>-1){
             laststoptime = laststoptime.replaceAll("T"," ");
+            try {
+                ltoptime=new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststoptime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         TblNode tblNode=null;
 
@@ -60,7 +67,7 @@ public class NodeController {
 //                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststarttime),
 //                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststoptime)
                     new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststarttime),
-                    new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststoptime)
+                    ltoptime
             );
         } catch (ParseException e) {
             e.printStackTrace();
@@ -94,12 +101,17 @@ public class NodeController {
         String laststarttime=req.getParameter("laststarttime");
         String laststoptime=req.getParameter("laststoptime");
         TblNode tblNode=null;
-
+        Date ltoptime =null;
         if(laststarttime.indexOf("T")>-1){
             laststarttime = laststarttime.replaceAll("T"," ");
         }
         if(laststoptime.indexOf("T")>-1){
             laststoptime = laststoptime.replaceAll("T"," ");
+            try {
+                ltoptime=new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststoptime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
         try {
@@ -109,7 +121,7 @@ public class NodeController {
 //                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststarttime),
 //                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(laststoptime)
                     new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststarttime),
-                    new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(laststoptime)
+                    ltoptime
             );
             tblNode.setId(Integer.parseInt(id));
         } catch (ParseException e) {
@@ -131,8 +143,7 @@ public class NodeController {
 
     @RequestMapping("/nodeSelectAll")
     public Object nodeSelectAll(HttpServletRequest req) {
-
         String whichNum=req.getParameter("whichNum");
-        return nodeService.nodeSelectAll(Integer.parseInt(whichNum));
+        return JSON.toJSONString(nodeService.nodeSelectAll(Integer.parseInt(whichNum)));
     }
 }

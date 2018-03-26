@@ -29,7 +29,7 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken(req.getParameter("num"), req.getParameter("password"));
         try {
             System.out.println("1");
-            subject.login(token);
+            //subject.login(token);
             jsonObject.put("token", subject.getSession().getId());
             jsonObject.put("msg", "登录成功");
             ViewUser user=new ViewUser();

@@ -21,9 +21,14 @@
 				<script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
 				<script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
 		<![endif]-->
+		<!-- 提示框-->
+		<link rel="stylesheet" href="114/simplepop.css">
+		<link rel="stylesheet" href="114/main.css">
+		<script src="114/jquery-1.11.1.min.js" type="text/javascript"></script>
+		<script src="114/simplepop.js"></script>
+		<!-- 提示框-->
 	</head>
 	<body>
-
 		<!--Start Header-->
 		<div id="screensaver">
 			<canvas id="canvas"></canvas>
@@ -98,7 +103,7 @@
 					</ul>
 					<ul class="nav main-menu" id="menuNodes">
 						<li>
-							<a href="bu/manageNodes.html" class="active ajax-link">
+							<a href="bu/nodeList.html" class="active ajax-link">
 								<i class="fa fa-sitemap"></i>
 								<span class="hidden-xs">OMSE节点管理</span>
 							</a>
@@ -127,25 +132,125 @@
 					<div id="ajax-content"></div>
 				</div>
 				<!--End Content-->
+				<div class="modal fade" id="nodeInsert" tabindex="-1" role="dialog" aria-labelledby="nodeInsertLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="nodeInsertLabel">添加节点</h4>
+							</div>
+							<div class="modal-body">
+								<form role="form" id="frmNodeInsert" name="frmNode">
+
+									<div class="form-group">
+										<label for="nodeid">节点号</label>
+										<input type="text" class="form-control"  name="nodeid" value="" />
+									</div>
+									<div class="form-group">
+										<label for="nodename">节点名称</label>
+										<input type="text" class="form-control"  name="nodename" value="" />
+									</div>
+									<div class="form-group">
+										<label for="configid">配置</label>
+										<input type="text" class="form-control"  name="configid" value="" />
+									</div>
+									<div class="form-group">
+										<label for="ipaddress">网址</label>
+										<input type="text" class="form-control"  name="ipaddress" value="" />
+									</div>
+									<div class="form-group">
+										<label for="status">状态</label>
+										<select class="form-control"  name="status">
+											<option value="0" selected>Off Line</option>
+											<option value="1">Start Up</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="laststarttime">上次启动时间</label>
+										<input type="datetime-local" class="form-control"  name="laststarttime" value="2018-03-13T00:00:00" />
+									</div>
+									<div class="form-group">
+										<label for="laststoptime">上次停止时间</label>
+										<input type="datetime-local" class="form-control"  name="laststoptime" value="2018-03-17T09:00:00"/>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary" id="btnNodeInsert">提交</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade" id="nodeUpdate" tabindex="-1" role="dialog" aria-labelledby="nodeUpdateLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="nodeUpdateLabel">修改节点</h4>
+							</div>
+							<div class="modal-body">
+								<form role="form" id="frmNodeUpdate" name="frmNode">
+
+									<div class="form-group">
+										<label for="nodeid">节点号</label>
+										<input type="text" class="form-control" id="nodeid" name="nodeid" value="" />
+									</div>
+									<div class="form-group">
+										<label for="nodename">节点名称</label>
+										<input type="text" class="form-control" id="nodename" name="nodename" value="" />
+									</div>
+									<div class="form-group">
+										<label for="configid">配置</label>
+										<input type="text" class="form-control" id="configid" name="configid" value="" />
+									</div>
+									<div class="form-group">
+										<label for="ipaddress">网址</label>
+										<input type="text" class="form-control" id="ipaddress" name="ipaddress" value="" />
+									</div>
+									<div class="form-group">
+										<label for="status">状态</label>
+										<select class="form-control" id="status" name="status">
+											<option value="0" selected>Off Line</option>
+											<option value="1">Start Up</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="laststarttime">上次启动时间</label>
+										<input type="datetime-local" class="form-control" id="laststarttime" name="laststarttime" value="2018-03-13T00:00:00" />
+									</div>
+									<div class="form-group">
+										<label for="laststoptime">上次停止时间</label>
+										<input type="datetime-local" class="form-control" id="laststoptime" name="laststoptime" value="2018-03-17T09:00:00"/>
+									</div>
+									<input type="hidden" id="cid" name="id"/>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary" id="btnNodeUpdate">提交</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!--End Container-->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<!--<script src="http://code.jquery.com/jquery.js"></script>-->
-		<script src="devoops/plugins/jquery/jquery-2.1.0.min.js"></script>
+		<!--<script src="devoops/plugins/jquery/jquery-2.1.0.min.js"></script>-->
 		<script src="devoops/plugins/jquery-ui/jquery-ui.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="devoops/plugins/bootstrap/bootstrap.min.js"></script>
 		<script src="devoops/plugins/justified-gallery/jquery.justifiedgallery.min.js"></script>
 		<script src="devoops/plugins/tinymce/tinymce.min.js"></script>
 		<script src="devoops/plugins/tinymce/jquery.tinymce.min.js"></script>
-		
 		<script src="js/shirofilter.js"></script>
 		<!-- All functions for this theme + document.ready processing -->
 		<script src="devoops/js/devoops.js"></script>
 		<script src="../js/websocket.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../node_modules/echarts/dist/echarts.js"></script>
-		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+		<!--<script src="../node_modules/jquery/dist/jquery.min.js"></script>-->
 		<script>
             var lStorage=window.localStorage;
             $('#userNameLogin').html(lStorage.userName);

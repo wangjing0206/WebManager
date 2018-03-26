@@ -47,4 +47,7 @@ public interface UserDao {
             " union SELECT groupId,'groupId',groupName,count(*)  FROM viewUsers where isDeleted=0 group by groupId" +
             " union SELECT roleId,'roleId',roleName,count(*)  FROM viewUsers  where isDeleted=0 group by roleId")
     public List<Count> getCount();
+    //验证工号是否存在
+    @Select("select count(*) from viewUsers where num =#{num} and isDeleted=0 limit 1")
+    public int chekNum(String num);
 }

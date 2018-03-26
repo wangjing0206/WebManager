@@ -69,4 +69,9 @@ public class UserServiceImpl implements UserService {
     public int getCountForSearch(ViewUser viewUser) {
         return userDao.getCountForSearch(viewUser);
     }
+
+    @Override
+    public int checkNum(String num) {
+        return userDao.chekNum(num);
+    }
 }

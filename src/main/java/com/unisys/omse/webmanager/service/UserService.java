@@ -25,4 +25,6 @@ public interface UserService {
     public List<Count> getCount();
     //8获取总条数（模糊查询）
     public int getCountForSearch(ViewUser viewUser);
+    //8查询工号是否存在
+    public int checkNum(String num);
 }

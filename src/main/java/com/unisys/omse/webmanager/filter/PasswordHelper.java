@@ -19,7 +19,7 @@ public class PasswordHelper {
     public static void main(String[] args) {
         PasswordHelper passwordHelper = new PasswordHelper();
         ViewUserRolePermission user = new ViewUserRolePermission();
-        user.setNum("20180002");
+        user.setNum("20180001");
         user.setUserPassword("123");
         passwordHelper.encryptPassword(user);
         System.out.println(user);

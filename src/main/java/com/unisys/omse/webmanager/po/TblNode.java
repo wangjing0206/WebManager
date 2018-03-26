@@ -1,17 +1,17 @@
 package com.unisys.omse.webmanager.po;
-
+import com.alibaba.fastjson.annotation.JSONField;
 import java.util.Date;
 
 public class TblNode {
-
-
     private int id;
     private int nodeid;
     private String nodename;
     private int configid;
     private String ipaddress;
     private String status;
+    @JSONField(format="yyyy-MM-dd hh:mm")
     private Date laststarttime;
+    @JSONField(format="yyyy-MM-dd hh:mm")
     private Date laststoptime;
 
     public TblNode() {
@@ -89,5 +89,19 @@ public class TblNode {
 
     public void setLaststoptime(Date laststoptime) {
         this.laststoptime = laststoptime;
+    }
+
+    @Override
+    public String toString() {
+        return "TblNode{" +
+                "id=" + id +
+                ", nodeid=" + nodeid +
+                ", nodename='" + nodename + '\'' +
+                ", configid=" + configid +
+                ", ipaddress='" + ipaddress + '\'' +
+                ", status='" + status + '\'' +
+                ", laststarttime=" + laststarttime +
+                ", laststoptime=" + laststoptime +
+                '}';
     }
 }

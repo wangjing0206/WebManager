@@ -155,4 +155,9 @@ public class UserController {
         viewUser.setGroupName(groupName);
         return userService.getCountForSearch(viewUser);
     }
+    @RequestMapping(value="/checkNum")
+    public Object checkNum(HttpServletRequest req){
+        String num=req.getParameter("num");
+        return userService.checkNum(num);
+    }
 }
